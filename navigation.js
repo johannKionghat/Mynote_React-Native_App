@@ -3,6 +3,10 @@ import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './screens/HomeScreen';
+import HelloScreen from './screens/HelloScreen';
+import SettingScreen from './screens/SettingScreen';
+import NoteScreen from './screens/NoteScreen';
+import StartScreen from './screens/StartScreen';
 
 const Stack=createNativeStackNavigator();
 export default function Navigation() {
@@ -11,7 +15,11 @@ export default function Navigation() {
         <Stack.Navigator
         screenOptions={{ headerShown:false}}
         >
+            <Stack.Screen name="Hello" component={HelloScreen}/>
+            <Stack.Screen name="Start" component={StartScreen}/>
             <Stack.Screen name="Home" component={HomeScreen}/>
+            <Stack.Screen name="Note" component={NoteScreen}/>
+            <Stack.Screen name="Setting" component={SettingScreen}/>
         </Stack.Navigator>
     </NavigationContainer>
   )
