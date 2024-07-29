@@ -1,16 +1,15 @@
 import React from 'react';
 import { View, Text, Dimensions, Image } from 'react-native';
-import Carousel from 'react-native-snap-carousel';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import Button from '../components/Button';
 import { SafeAreaView } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { themeColors } from '../theme';
-import Navigation from '../navigation';
 import { useNavigation } from '@react-navigation/native';
+import Carousel from 'react-native-reanimated-carousel';
 
 
-const { width: screenWidth } = Dimensions.get('window');
+const width = Dimensions.get('window').width;
 
 const data = [
   { title: 'Item 1', text1: 'Easy Notes', text2: 'Creation',text3:'with Colors',text4: 'Express ideas with vibrant colors', image: require('../assets/images/image1.png'), step: require('../assets/images/step1.png')},
@@ -19,38 +18,39 @@ const data = [
 ];
 
 export default function StartScreen() {
-  const navigation=useNavigation();
-  const renderItem = ({ item, index }) => (
-    <View className="flex-1 justify-center" style={{height:"100%"}}>
-        <View className="flex-1 items-center justify-center gap-3">
-          <Image source={item.image} style={{width:"100%",height:"50%", objectFit:"contain"}}/>
-          <View className="flex-row flex-wrap text-center items-center justify-center">
-          <Text  style={{fontFamily:"MontserratBold", fontSize:hp(3), color:themeColors.primary}}>{item.text1}</Text>
-          <Text style={{fontFamily:"MontserratBold", fontSize:hp(3), color:themeColors.text}}> {item.text2}</Text>
-          </View>
-          <Text style={{fontFamily:"MontserratBold", fontSize:hp(3), color:themeColors.text}}> {item.text3} </Text>
-          <Text style={{fontFamily:"MontserratRegular", fontSize:hp(2), color:themeColors.text}}> {item.text4} </Text>
-          <Image source={item.step} style={{width:30, objectFit:"contain"}}/>
-        </View>
-      </View>
-
-      
-      
-  );
-
+  const navigation = useNavigation();
   return (
     <SafeAreaView className="flex-1 items-center justify-center bg-white">
       <StatusBar barStyle={"dark-content"}/>
-      <Carousel
-          data={data}
-          renderItem={renderItem}
-          sliderWidth={screenWidth}
-          itemWidth={screenWidth - 10}
-        />
+      <View style={{ flex: 1 }}>
+            <Carousel
+                loop
+                width={width}
+                height={hp(90)}
+                data={data}
+                autoPlay
+                scrollAnimationDuration={1000}
+                renderItem = {({ item, index }) => (
+                  <View className="flex-1 justify-center" style={{height:"100%"}}>
+                      <View className="flex-1 items-center justify-center gap-3">
+                        <Image source={item.image} style={{width:"100%",height:"60%", objectFit:"contain"}}/>
+                        <View className="flex-row flex-wrap text-center items-center justify-center">
+                        <Text  style={{fontFamily:"MontserratBold", fontSize:hp(3), color:themeColors.primary}}>{item.text1}</Text>
+                        <Text style={{fontFamily:"MontserratBold", fontSize:hp(3), color:themeColors.text}}> {item.text2}</Text>
+                        </View>
+                        <Text style={{fontFamily:"MontserratBold", fontSize:hp(3), color:themeColors.text}}> {item.text3} </Text>
+                        <Text style={{fontFamily:"MontserratRegular", fontSize:hp(2), color:themeColors.text}}> {item.text4} </Text>
+                        <Image source={item.step} style={{width:30, objectFit:"contain"}}/>
+                      </View>
+                    </View>
+                )}
+            />
+        </View>
         <View className="flex pb-10" >
           <Button onPress={()=>navigation.navigate('Home')} text={"NEXT"} textColor={"white"} bgColor={themeColors.primary} bgColorhover={themeColors.secondary} />
         </View>
     </SafeAreaView>
   );
 }
+
 
