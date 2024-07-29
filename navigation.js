@@ -6,6 +6,7 @@ import HelloScreen from './screens/HelloScreen';
 import SettingScreen from './screens/SettingScreen';
 import NoteScreen from './screens/NoteScreen';
 import StartScreen from './screens/StartScreen';
+import CalendarNoteScreen from './screens/CalendarNoteScreen';
 
 const Stack=createNativeStackNavigator();
 export default function Navigation() {
@@ -18,6 +19,7 @@ export default function Navigation() {
             <Stack.Screen name="Home" component={HomeScreen}/>
             <Stack.Screen name="Note" component={NoteScreen}/>
             <Stack.Screen name="Setting" component={SettingScreen}/>
+            <Stack.Screen name="CalendarNote" component={CalendarNoteScreen}/>
         </Stack.Navigator>
   )
 }
