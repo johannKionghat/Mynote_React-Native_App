@@ -5,6 +5,7 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 import { SafeAreaView } from 'react-native';
 import { StatusBar } from 'react-native';
 import Tab from '../components/Tab';
+import ButtonPlusFloat from '../components/ButtonPlusFloat';
 
 
 export default function HomeScreen() {

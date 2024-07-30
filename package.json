@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^14.0.2",
+    "@radiet/react-native-popup-menu": "^0.16.1",
     "@react-navigation/native": "^6.1.18",
     "@react-navigation/native-stack": "^6.11.0",
     "@react-navigation/stack": "^6.4.1",
@@ -37,7 +38,10 @@
     "react-native": "0.74.3",
     "react-native-calendars": "^1.1306.0",
     "react-native-gesture-handler": "~2.16.1",
+    "react-native-masonry-list": "^2.16.1",
+    "react-native-modal": "^13.0.1",
     "react-native-pager-view": "6.3.0",
+    "react-native-popup-menu": "^0.16.1",
     "react-native-reanimated": "~3.10.1",
     "react-native-reanimated-carousel": "^3.5.1",
     "react-native-responsive-screen": "^1.4.2",

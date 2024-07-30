@@ -6,8 +6,9 @@ const pallete = [
         black: `black`,
         primary: `#7EE4EC`,
         secondary: `#114B5F`,
-        third: `456990`,
+        third: `#456990`,
         white: `white`,
+        primaryOpacity: opacity=>`rgba(126, 228, 236,${opacity})`,
         grayOpacity: opacity=>`rgba(128, 128, 128, ${opacity})`,
 
     },
