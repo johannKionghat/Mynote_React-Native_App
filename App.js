@@ -3,6 +3,7 @@ import Navigation from "./navigation";
 import './global.css'
 import * as Font from 'expo-font';
 import { NavigationContainer } from '@react-navigation/native';
+import { MenuProvider } from 'react-native-popup-menu';
 
 
 const loadFonts = async () => {
@@ -26,8 +27,11 @@ export default  App = ()=>{
       return null; 
     }
   return (
-    <NavigationContainer>
-        <Navigation/>
-    </NavigationContainer>
+    <MenuProvider>
+        <NavigationContainer>
+          <Navigation/>
+        </NavigationContainer>
+    </MenuProvider>
+    
   );
 };

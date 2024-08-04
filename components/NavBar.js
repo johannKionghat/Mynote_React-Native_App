@@ -38,14 +38,14 @@ export default function NavBar() {
         <Text style={{ fontFamily: "MontserratBold", fontSize: hp(2.5), color: themeColors.black }}>All Notes</Text>
       </View>
       <View className="flex-row justify-between items-center gap-4">
-        <TouchableOpacity>
-          <FontAwesome name="search" size={hp(3)} color="black" />
+        <TouchableOpacity onPress={()=>navigation.navigate('Search')}>
+          <FontAwesome name="search" size={hp(3)} color={themeColors.black} />
         </TouchableOpacity>
         <TouchableOpacity  onPress={handleOpenModal}>
-          <FontAwesome6 name="arrow-down-wide-short" size={hp(3)} color="black" />
+          <FontAwesome6 name="arrow-down-wide-short" size={hp(3)} color={themeColors.black} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate('CalendarNote')}>
-          <Ionicons name="calendar-sharp" size={hp(3)} color="black" />
+          <Ionicons name="calendar-sharp" size={hp(3)} color={themeColors.black} />
         </TouchableOpacity>
       </View>
     </View>

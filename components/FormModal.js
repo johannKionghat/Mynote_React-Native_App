@@ -34,10 +34,10 @@ const FormModal = ({ isVisible, onClose, onSubmit }) => {
         <Text style={{fontFamily:"MontserratBold", fontSize:hp(1.8), color:themeColors.black}}>Filters</Text>
         <View className="flex-row justify-between gap-2 py-3">
           <TouchableOpacity onPress={handlePressButton} style={{borderRadius:5, backgroundColor:bgColor, width:"48%", padding:10,alignItems:"center"}} >
-              <Text style={{fontFamily:"MontserratBold", fontSize:hp(1.8), color:textColor}}>Filters</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={{borderRadius:5, backgroundColor:themeColors.grayOpacity(0.3), width:"48%", padding:10,alignItems:"center"}} >
-              <Text style={{fontFamily:"MontserratBold", fontSize:hp(1.8), color:themeColors.black}}>Filters</Text>
+              <Text style={{fontFamily:"MontserratBold", fontSize:hp(1.8), color:textColor}}>Grid</Text>
+          </TouchableOpacity >
+          <TouchableOpacity  onPress={handlePressButton} style={{borderRadius:5, backgroundColor:themeColors.grayOpacity(0.3), width:"48%", padding:10,alignItems:"center"}} >
+              <Text style={{fontFamily:"MontserratBold", fontSize:hp(1.8), color:themeColors.black}}>List</Text>
           </TouchableOpacity>
         </View>
         <Text style={{fontFamily:"MontserratBold", fontSize:hp(1.8), color:themeColors.black}}>Sort by</Text>

@@ -55,9 +55,9 @@ const notesData = [
       columnWrapperStyle={{ justifyContent: 'space-between' }}
       renderItem={({ item }) => (
         <TouchableOpacity style={{ width: '48%', backgroundColor:themeColors.white, borderWidth: 1, borderRadius:5, margin:3, padding:10, borderColor:themeColors.grayOpacity(0.3)}}>
-          <Text style={{fontFamily:"MontserratBold", fontSize:hp(2), color:themeColors.text}} className="font-bold text-lg text-black">{item.title}</Text>
+          <Text style={{fontFamily:"MontserratBold", fontSize:hp(2), color:themeColors.black}} className="font-bold text-lg text-black">{item.title}</Text>
           <View className="py-4" style={{height:180}}>
-            <Text style={{fontFamily:"MontserratBold", fontSize:hp(1.5), color:themeColors.grayOpacity(0.5)}} className="text-base text-text mt-2">{item.content}</Text>
+            <Text style={{fontFamily:"MontserratRegular", fontSize:hp(1.8), color:themeColors.grayOpacity(0.8)}} className="text-base text-text mt-2">{item.content}</Text>
           </View>
           <ButtonCategorie text={item.category} bgColor={themeColors.grayOpacity(0.2)} />
         </TouchableOpacity>

@@ -4,10 +4,12 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 import {
     Menu,
     MenuOptions,
+
     MenuTrigger,
   } from 'react-native-popup-menu';
 import { MenuItem } from './CustomMenuItems';
-import { AntDesign, Feather } from '@expo/vector-icons';
+import { AntDesign, Entypo, Feather, FontAwesome5, MaterialIcons } from '@expo/vector-icons';
+import { themeColors } from '../theme';
 
 export default MenuNote = ()=>{
     const Divider = ()=>{
@@ -22,9 +24,7 @@ export default MenuNote = ()=>{
                     // trigger wrapper style
                 }
             }}>
-                <TouchableOpacity>
-                    <Feather name="settings" size={hp(3)} color="black"/>
-                </TouchableOpacity>
+                <Feather name="settings" size={hp(3)} color="black"/>
             </MenuTrigger>
             <MenuOptions
               customStyles={{
@@ -32,7 +32,7 @@ export default MenuNote = ()=>{
                     borderRadius:10,
                     borderCurve: 'continuous',
                     marginTop: 40,
-                    marginLeft: -30,
+                    marginLeft: -10,
                     backgroundColor:'white',
                     shadowOpacity: 0.2,
                     shadowOffset: {width:0, height:0},
@@ -41,18 +41,33 @@ export default MenuNote = ()=>{
               }}
             >
                 <MenuItem
-                  text='Profile'
+                  text='Lock'
                 //   action={handleProfile}
                   value={null}
-                  icon={<Feather name="user" size={hp(2.5)} color='#737373'/>}
+                  icon={<Entypo name="lock" size={hp(3)} color={themeColors.black}/>}
                 />
                 <Divider/>
                 <MenuItem
-                  text='Sign Out'
-                //   action={handleLogout}
+                  text='Read'
+                //   action={handleProfile}
                   value={null}
-                  icon={< AntDesign name="logout" size={hp(2.5)} color='#737373'/>}
+                  icon={<MaterialIcons name="menu-book" size={hp(3)} color={themeColors.black}/>}
                 />
+                <Divider/>
+                <MenuItem
+                  text='Categorie'
+                //   action={handleProfile}
+                  value={null}
+                  icon={<MaterialIcons name="category" size={hp(3)} color={themeColors.black}/>}
+                />
+                <Divider/>
+                <MenuItem
+                  text='Share'
+                //   action={handleProfile}
+                  value={null}
+                  icon={<Entypo name="share" size={hp(3)} color={themeColors.black}/>}
+                />
+          
             </MenuOptions>
         </Menu>
   )
