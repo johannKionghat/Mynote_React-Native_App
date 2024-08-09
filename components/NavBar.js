@@ -8,7 +8,6 @@ import FormModal from './FormModal';
 
 export default function NavBar() {
   const navigation = useNavigation();
-  // Création du modal formulaire filter
   const [isModalVisible, setModalVisible] = useState(false);
 
   const handleOpenModal = () => {
@@ -21,7 +20,6 @@ export default function NavBar() {
 
   const handleSubmit = (data) => {
     console.log('Form Data:', data);
-    // Vous pouvez traiter les données du formulaire ici
   };
 
   return (

@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, {  useEffect, useState } from 'react';
 import Navigation from "./navigation";
 import './global.css'
 import * as Font from 'expo-font';
 import { NavigationContainer } from '@react-navigation/native';
 import { MenuProvider } from 'react-native-popup-menu';
+import { FormValueProvider } from './components/FormContext';
 
 
 const loadFonts = async () => {
@@ -13,7 +14,9 @@ const loadFonts = async () => {
     });
   };
 
+
  
+
 export default  App = ()=>{
     const [fontsLoaded, setFontsLoaded] = useState(false);
 
@@ -27,11 +30,15 @@ export default  App = ()=>{
       return null; 
     }
   return (
-    <MenuProvider>
+    <FormValueProvider>
+      <MenuProvider>
         <NavigationContainer>
           <Navigation/>
         </NavigationContainer>
     </MenuProvider>
+    </FormValueProvider>
+    
     
   );
 };
+

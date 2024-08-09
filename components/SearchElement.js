@@ -13,7 +13,7 @@ export default function SearchElement() {
       <MaterialCommunityIcons name="file-find" size={hp(13)} color={themeColors.grayOpacity(0.3)} />
     </View>
     <View className="mb-8">
-      <Text style={{fontFamily:"MontserratBold", fontSize:hp(3), color:themeColors.black}}>No search notes !</Text>
+      <Text style={{fontFamily:"MontserratRegular", fontSize:hp(3), color:themeColors.grayOpacity(0.6)}}>No search notes !</Text>
     </View>
   </View>
   )

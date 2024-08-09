@@ -1,52 +1,43 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, TextInput, StyleSheet, Pressable, Touchable, TouchableOpacity } from 'react-native';
+import React, { useContext } from 'react';
+import { View, Text, TextInput, StyleSheet, Touchable, TouchableOpacity } from 'react-native';
 import Modal from 'react-native-modal';
 import { themeColors } from '../theme';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import RadioGroupComponent2 from './RadioGroupComponent2';
+import RadioGroupComponent1 from './RadioGroupComponent1';
+import { FormContext } from './FormContext';
 
 
 const FormModal = ({ isVisible, onClose, onSubmit }) => {
-  const [name, setName] = useState('');
-  const [buttonSelected, setButtonSelected] = useState(false);
-  const [bgColor,setBgColor] = useState(themeColors.grayOpacity(0.3));
-  const [textColor,setTextColor] = useState(themeColors.text);
-  const handlePressButton = ()=>{
-    buttonSelected ? (setButtonSelected(false),setBgColor(themeColors.grayOpacity(0.3), setTextColor(themeColors.text))): (setButtonSelected(true), setBgColor(themeColors.primary), setTextColor(themeColors.white));
-    console.log(bgColor,textColor);
-    return (bgColor,textColor);
-  }
-  const [email, setEmail] = useState('');
-
+  const { range, setRange, sortBy, setSortBy } = useContext(FormContext);
+ 
   const handleSubmit = () => {
-    if (name && email) {
-      onSubmit({ name, email });
-      setName('');
-      setEmail('');
+    if (range && sortBy) {
+      onSubmit({ range, sortBy });
+
       onClose();
     } else {
+      console.log(range, sortBy);
       alert('Please fill in all fields');
     }
   };
 
   return (
     <Modal isVisible={isVisible} onBackdropPress={onClose}>
-      <View style={styles.modalContent} className="flex justify-center">
-        <Text style={{fontFamily:"MontserratBold", fontSize:hp(1.8), color:themeColors.black}}>Filters</Text>
-        <View className="flex-row justify-between gap-2 py-3">
-          <TouchableOpacity onPress={handlePressButton} style={{borderRadius:5, backgroundColor:bgColor, width:"48%", padding:10,alignItems:"center"}} >
-              <Text style={{fontFamily:"MontserratBold", fontSize:hp(1.8), color:textColor}}>Grid</Text>
-          </TouchableOpacity >
-          <TouchableOpacity  onPress={handlePressButton} style={{borderRadius:5, backgroundColor:themeColors.grayOpacity(0.3), width:"48%", padding:10,alignItems:"center"}} >
-              <Text style={{fontFamily:"MontserratBold", fontSize:hp(1.8), color:themeColors.black}}>List</Text>
-          </TouchableOpacity>
-        </View>
+      <View style={styles.modalContent} className="flex justify-center">        
         <Text style={{fontFamily:"MontserratBold", fontSize:hp(1.8), color:themeColors.black}}>Sort by</Text>
+        <View className="flex-row justify-between gap-2 py-3">
+        <RadioGroupComponent1/>
+        </View>
         <Text style={{fontFamily:"MontserratBold", fontSize:hp(1.8), color:themeColors.black}}>Range</Text>
+        <View className="flex-row justify-between gap-2 py-3">
+        <RadioGroupComponent2 range={null}/>
+        </View>
         <View className="flex-row items-center justify-end gap-4">
-          <TouchableOpacity>
+          <TouchableOpacity onPress={onClose}>
             <Text style={{fontFamily:"MontserratBold", fontSize:hp(1.8), color:themeColors.grayOpacity(0.5)}}> CANCEL </Text>
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={handleSubmit}>
             <Text style={{fontFamily:"MontserratBold", fontSize:hp(1.8), color:themeColors.primary}}> APPLY </Text>
           </TouchableOpacity>
         </View>
