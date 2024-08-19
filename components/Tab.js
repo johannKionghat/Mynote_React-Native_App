@@ -46,7 +46,7 @@ export default function Tab() {
     <TabBar
       {...props}
       renderLabel={({ route, focused, color }) => (
-        <Text  style={{ color:themeColors.text, fontFamily:"MontserratBold", fontSize:hp(2) }}>
+        <Text  style={{ color:themeColors.text, fontFamily:"MontserratRegular", fontSize:hp(2) }}>
           {route.title}
           {focused}
         </Text>

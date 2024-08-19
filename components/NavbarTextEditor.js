@@ -17,13 +17,6 @@ export default function NavBarTextEditor() {
             </TouchableOpacity>
         </View>
         <View className="flex-row justify-between items-center gap-4 ">
-            <TouchableOpacity onPress={()=>navigation.navigate('CalendarNote')}>
-                <Ionicons name="bookmarks" size={hp(3)} color="black"/>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={()=>navigation.navigate('CalendarNote')}>
-                <Entypo name="stopwatch" size={hp(3)} color="black"/>
-            </TouchableOpacity>
-            {/* menu */}
             <View>
                 <MenuNote/>
             </View>

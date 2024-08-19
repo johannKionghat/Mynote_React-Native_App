@@ -8,7 +8,7 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 export default function Searchbar() {
   return (
     <View className="flex-row items-center px-4 p-2" style={{marginRight:wp(5)}} >
-        <View className = "flex-row items-center px-4 rounded-full border border-gray-50">
+        <View className = "flex-row items-center px-4  py-3 rounded-full border border-gray-500">
         <FontAwesome name="search" size={hp(3)} color={themeColors.black} />
             <TextInput placeholder='Search' className='ml-2 flex-1'/>
         </View>

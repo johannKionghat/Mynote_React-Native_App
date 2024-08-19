@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
-import { View, Text, TextInput, StyleSheet, Touchable, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Modal from 'react-native-modal';
 import { themeColors } from '../theme';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import RadioGroupComponent2 from './RadioGroupComponent2';
 import RadioGroupComponent1 from './RadioGroupComponent1';
-import { FormContext } from './FormContext';
+import { FormContext } from '../context/FormContext';
 
 
 const FormModal = ({ isVisible, onClose, onSubmit }) => {

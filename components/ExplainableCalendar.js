@@ -18,7 +18,7 @@ const ExplainableCalendar = () => {
           const numItems = Math.floor(Math.random() * 3 + 1);
           for (let j = 0; j < numItems; j++) {
             newItems[strTime].push({
-              name: `Item for ${strTime}`,
+              name: `Notes for ${strTime}`,
               height: Math.max(50, Math.floor(Math.random() * 150)),
             });
           }

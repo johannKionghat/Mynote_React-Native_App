@@ -8,7 +8,7 @@ import {
     MenuTrigger,
   } from 'react-native-popup-menu';
 import { MenuItem } from './CustomMenuItems';
-import { AntDesign, Entypo, Feather, FontAwesome5, MaterialIcons } from '@expo/vector-icons';
+import { Entypo, Feather, FontAwesome5, MaterialIcons } from '@expo/vector-icons';
 import { themeColors } from '../theme';
 
 export default MenuNote = ()=>{
@@ -48,13 +48,6 @@ export default MenuNote = ()=>{
                 />
                 <Divider/>
                 <MenuItem
-                  text='Read'
-                //   action={handleProfile}
-                  value={null}
-                  icon={<MaterialIcons name="menu-book" size={hp(3)} color={themeColors.black}/>}
-                />
-                <Divider/>
-                <MenuItem
                   text='Categorie'
                 //   action={handleProfile}
                   value={null}
@@ -62,10 +55,10 @@ export default MenuNote = ()=>{
                 />
                 <Divider/>
                 <MenuItem
-                  text='Share'
+                  text='Delete'
                 //   action={handleProfile}
                   value={null}
-                  icon={<Entypo name="share" size={hp(3)} color={themeColors.black}/>}
+                  icon={<MaterialIcons name="delete-sweep" size={hp(3)} color={themeColors.black}/>}
                 />
           
             </MenuOptions>
