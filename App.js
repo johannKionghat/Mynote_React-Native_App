@@ -1,13 +1,12 @@
 import React, {  useContext, useEffect, useState } from 'react';
-import Navigation from "./navigation";
 import './global.css'
 import * as Font from 'expo-font';
 import { NavigationContainer } from '@react-navigation/native';
 import { MenuProvider } from 'react-native-popup-menu';
 import { FormValueProvider } from './context/FormContext';
-import * as SQLite from "expo-sqlite";
-import { createCategory, createNote, deleteAllCategories, deleteAllNotes, deleteById, deleteCategoryByName, deleteNoteById, getAllCategories, getAllNotes, updateCategoryColor, updateCategoryName, updateNoteContent, updateNoteTitle, } from './db/crud';
-import { databaseContext, DatabaseProvider } from './context/DatabaseContext';
+import {GlobalProvider } from './context/GlobalContext';
+import Navigation from "./navigation";
+
 
 // importation des fonts Montserrat
 const loadFonts = async () => {
@@ -17,8 +16,6 @@ const loadFonts = async () => {
     });
   };
 
-// creation de ma base de données
-export const db = SQLite.openDatabaseSync("mynote.db") // si elle n'existe pas elle sera crée automatiquement
 export default function  App (){
     const [fontsLoaded, setFontsLoaded] = useState(false);
 
@@ -33,7 +30,7 @@ export default function  App (){
     }
     
   return (
-    <DatabaseProvider>
+      <GlobalProvider>
         <FormValueProvider>
           <MenuProvider>
             <NavigationContainer>
@@ -41,7 +38,7 @@ export default function  App (){
             </NavigationContainer>
           </MenuProvider>
         </FormValueProvider>
-    </DatabaseProvider>
+      </GlobalProvider>
   );
 };
 

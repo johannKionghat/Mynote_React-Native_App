@@ -1,6 +1,6 @@
 
 import { Text, View } from 'react-native'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { themeColors } from '../theme';
 import ButtonPlusFloat from './ButtonPlusFloat';
 import NotesDisplay from './NotesDisplay';
@@ -8,14 +8,17 @@ import { useNavigation } from '@react-navigation/native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import ButtonPlus from './ButtonPlus';
+import { databaseContext, globalContext } from '../context/GlobalContext';
 
 export default function NotesTab() {
+  let {categoriesArray, setCategoriesArray, notesArray, setNotesArray, note, setNote, stateEdit, setStateEdit} = useContext(globalContext);
   const navigation = useNavigation();
-  
+
   const handleNewNote = ()=>{
-    // cree une nouvelle note
+    setStateEdit(false);
+    navigation.navigate("TextEditor");
   };
-  if (true){
+  if (notesArray.length !== 0){
     return(
       <View className="flex-1">
         <View style={{position:"absolute", bottom:20, right:20, zIndex:1000}}>
@@ -36,7 +39,7 @@ export default function NotesTab() {
           <View className="mb-8">
             <Text style={{fontFamily:"MontserratRegular", fontSize:hp(1.8), color:themeColors.text}}> you haven't created any note yet ! </Text>
           </View>
-          <ButtonPlus text={"Create Note"} textColor={themeColors.white} bgColor={themeColors.primary} iconColor={themeColors.white} />
+          <ButtonPlus onPress={handleNewNote} text={"Create Note"} textColor={themeColors.white} bgColor={themeColors.primary} iconColor={themeColors.white} />
         </View>
       )
   }
