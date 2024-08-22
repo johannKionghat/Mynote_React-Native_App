@@ -25,6 +25,11 @@ export default function SearchElement() {
   const handleNotesView = (item)=>{
     setNote(item);
     setStateEdit(true);
+    async function fetchData (){
+      let AllNotes = await getAllNotes();
+      setNotesArray(AllNotes);
+    };
+    fetchData();
     navigation.navigate("TextEditor");
   }
   if (resultSearch.length === 0){
@@ -49,7 +54,7 @@ export default function SearchElement() {
         renderItem={async ({item} ) => {
           let category = await getCategorybyId(item.category_id);
           return(
-            <TouchableOpacity onPress={()=>handleNotesView(item)} style={{ width: '48%', backgroundColor:themeColors.white, borderWidth: 1, borderRadius:5, margin:3, padding:10, borderColor:themeColors.grayOpacity(0.3)}}>
+            <TouchableOpacity onPress={()=>handleNotesView(item)} style={{ width: '48%', backgroundColor:category.color, borderWidth: 1, borderRadius:5, margin:3, padding:10, borderColor:themeColors.grayOpacity(0.3)}}>
               <RenderHTML
                     contentWidth={wp(48)}
                     source={{ html: item.title }} // Le contenu HTML de la note

@@ -9,20 +9,22 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import ButtonPlus from './ButtonPlus';
 import { databaseContext, globalContext } from '../context/GlobalContext';
+import { getCategorybyId, getCategorybyName } from '../db/crud';
 
 export default function NotesTab() {
-  let {categoriesArray, setCategoriesArray, notesArray, setNotesArray, note, setNote, stateEdit, setStateEdit} = useContext(globalContext);
+  let {categoriesArray, setCategoriesArray, notesArray, setStateEdit, setCategory} = useContext(globalContext);
   const navigation = useNavigation();
 
-  const handleNewNote = ()=>{
+  const handleNewNote = async ()=>{
     setStateEdit(false);
+    setCategory( await getCategorybyName ("Sticky-Note"))
     navigation.navigate("TextEditor");
   };
   if (notesArray.length !== 0){
     return(
       <View className="flex-1">
         <View style={{position:"absolute", bottom:20, right:20, zIndex:1000}}>
-          <ButtonPlusFloat onPress={handleNewNote} bgColor={themeColors.primaryOpacity(0.3)} iconColor={themeColors.primary}/>
+          <ButtonPlusFloat onPress={handleNewNote} bgColor={themeColors.grayOpacity(0.7)} iconColor={themeColors.primary}/>
         </View>
         <NotesDisplay/>
       </View>

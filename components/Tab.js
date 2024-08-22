@@ -13,11 +13,11 @@ const Notes = () => (
 </View>
 );
 
-const reminder = () => (
-  <View style={{ flex: 1, backgroundColor: themeColors.white }}>
-    <ReminderTab/>
-</View>
-);
+// const reminder = () => (
+//   <View style={{ flex: 1, backgroundColor: themeColors.white }}>
+//     <ReminderTab/>
+// </View>
+// );
 
 const bookmark = () => (
     <View style={{ flex: 1, backgroundColor: themeColors.white }} >
@@ -27,7 +27,7 @@ const bookmark = () => (
 
 const renderScene = SceneMap({
   first: Notes,
-  second: reminder,
+  // second: reminder,
   third: bookmark,
 });
 
@@ -38,7 +38,7 @@ export default function Tab() {
   const [index, setIndex] = useState(0);
   const [routes] = useState([
     { key: 'first', title: 'Notes' },
-    { key: 'second', title: 'Reminder' },
+    // { key: 'second', title: 'Reminder' },
     { key: 'third', title: 'Bookmark' },
 
   ]);

@@ -3,6 +3,6 @@ import React from 'react'
 
 export default Divider = ()=>{
     return (
-      <View className="p-[1px] w-full bg-neutral-200"/>
+      <View className="my-3 p-[1px] w-full bg-neutral-200"/>
     )
   }

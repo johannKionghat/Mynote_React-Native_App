@@ -1,91 +1,125 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import React, { useContext, useState } from 'react';
+import { View, TouchableOpacity, FlatList } from 'react-native';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { Agenda } from 'react-native-calendars';
 import { themeColors } from '../theme';
+import { globalContext } from '../context/GlobalContext';
+import RenderHTML from 'react-native-render-html';
+import ButtonPlus from './ButtonPlus';
+import { getCategorybyName, getNotesByDate } from '../db/crud';
+import { useNavigation } from '@react-navigation/native';
 
 const ExplainableCalendar = () => {
-  const [items, setItems] = useState({});
+  const { setStateEdit, setCategory } = useContext(globalContext);
+  const [notesByDate, setNotesByDate] = useState([]);
+  const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
+  const navigation = useNavigation();
 
-  const loadItems = (day) => {
-    const newItems = {};
-    setTimeout(() => {
-      for (let i = -15; i < 85; i++) {
-        const time = day.timestamp + i * 24 * 60 * 60 * 1000;
-        const strTime = timeToString(time);
-        if (!items[strTime]) {
-          newItems[strTime] = [];
-          const numItems = Math.floor(Math.random() * 3 + 1);
-          for (let j = 0; j < numItems; j++) {
-            newItems[strTime].push({
-              name: `Notes for ${strTime}`,
-              height: Math.max(50, Math.floor(Math.random() * 150)),
-            });
-          }
-        } else {
-          newItems[strTime] = items[strTime];
-        }
-      }
-      setItems(newItems);
-    }, 1000);
+  // Load notes for the selected date
+  const loadItems = async (day) => {
+    const selectedDay = day.dateString;
+    setSelectedDate(selectedDay);
+
+    const notes = await getNotesByDate(selectedDay);
+    setNotesByDate(notes);
   };
 
-  const renderItem = (item) => {
-    return (
-      <TouchableOpacity style={[styles.item, { height: item.height }]}>
-        <Text>{item.name}</Text>
-      </TouchableOpacity>
-    );
+  // Handle creating a new note
+  const handleNewNote = async () => {
+    setStateEdit(false);
+    setCategory(await getCategorybyName('Sticky-Note'));
+    navigation.navigate('TextEditor', { selectedDate });
+  };
+
+  // Render each item or show the "Create Note" button if no notes are present
+  const renderItem = () => {
+    if (notesByDate.length === 0) {
+      return (
+        <ButtonPlus
+          onPress={handleNewNote}
+          text="Create Note"
+          textColor={themeColors.white}
+          bgColor={themeColors.primary}
+          iconColor={themeColors.white}
+        />
+      );
+    } else {
+      return (
+        <FlatList
+          data={notesByDate}
+          keyExtractor={item => item.id.toString()}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              onPress={() => handleNotesView(item)}
+              style={{
+                width: '100%',
+                backgroundColor: themeColors.grayOpacity(0.9),
+                borderWidth: 1,
+                borderRadius: 5,
+                margin: 3,
+                padding: 10,
+                borderColor: themeColors.grayOpacity(0.3)
+              }}
+            >
+              <RenderHTML
+                contentWidth={wp(48)}
+                source={{ html: item.title }}
+                ignoredDomTags={['input', 'form']}
+                baseStyle={{
+                  fontFamily: 'MontserratBold',
+                  fontWeight: 'bold',
+                  fontSize: hp(2),
+                  color: themeColors.black,
+                }}
+              />
+              <View style={{ height: 50, overflow: 'hidden', marginBottom: 10 }}>
+                <RenderHTML
+                  contentWidth={wp(48)}
+                  source={{ html: item.content }}
+                  ignoredDomTags={['input', 'form']}
+                  baseStyle={{
+                    fontFamily: 'MontserratRegular',
+                    fontSize: hp(1.8),
+                    color: themeColors.black,
+                  }}
+                />
+              </View>
+            </TouchableOpacity>
+          )}
+        />
+      );
+    }
   };
 
   return (
-    <View style={styles.container}>
+    <View style={{ flex: 1 }}>
       <Agenda
-        items={items}
-        loadItemsForMonth={loadItems}
-        selected={new Date().toISOString().split('T')[0]}
+        items={{ [selectedDate]: notesByDate }}
+        loadItemsForMonth={() => {}} // No-op since we're only loading one day at a time
+        selected={selectedDate}
+        onDayPress={loadItems} // Load notes when a date is selected
         renderItem={renderItem}
+        renderEmptyData={renderItem} // Show "Create Note" button if no notes
         theme={{
           backgroundColor: themeColors.white,
           calendarBackground: themeColors.white,
           textSectionTitleColor: themeColors.primary,
-          textDayHeaderFontFamily:"MontserratBold",
-          textDayFontFamily:"MontserratRegular",
-          todayButtonFontFamily:"MontserratBold",
-          textMonthFontFamily:"MontserratBold",
+          textDayHeaderFontFamily: "MontserratBold",
+          textDayFontFamily: "MontserratRegular",
+          todayButtonFontFamily: "MontserratBold",
+          textMonthFontFamily: "MontserratBold",
           selectedDayBackgroundColor: themeColors.primary,
           selectedDayTextColor: themeColors.white,
           todayTextColor: themeColors.white,
           dayTextColor: themeColors.text,
-          dotColor:themeColors.primary,
-          todayBackgroundColor:themeColors.primary,
-          selectedDotColor:themeColors.white,
-          // agendaDayTextColor:themeColors.primary,
-          // agendaKnobColor:themeColors.third,
-          // agendaDayNumColor:themeColors.primary,
-          agendaTodayColor:themeColors.primary,
-          }}
+          dotColor: themeColors.primary,
+          todayBackgroundColor: themeColors.primary,
+          selectedDotColor: themeColors.white,
+          agendaTodayColor: themeColors.primary,
+        }}
       />
     </View>
   );
 };
-
-const timeToString = (time) => {
-  const date = new Date(time);
-  return date.toISOString().split('T')[0];
-};
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  item: {
-    backgroundColor: 'white',
-    borderRadius: 5,
-    padding: 10,
-    marginRight: 10,
-    marginTop: 17,
-  },
-});
 
 export default ExplainableCalendar;
