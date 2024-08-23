@@ -30,7 +30,7 @@ export default function StartScreen() {
                 data={data}
                 autoPlay
                 scrollAnimationDuration={1000}
-                renderItem = {({ item, index }) => (
+                renderItem = {({ item }) => (
                   <View className="flex-1 justify-center" style={{height:"100%"}}>
                       <View className="flex-1 items-center justify-center gap-3">
                         <Image source={item.image} style={{width:"100%",height:"60%", objectFit:"contain"}}/>
